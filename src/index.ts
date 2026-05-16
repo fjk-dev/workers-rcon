@@ -1,6 +1,5 @@
 import { connect } from 'cloudflare:sockets';
 
-// Типы пакетов RCON
 const SERVERDATA_AUTH = 3;
 const SERVERDATA_EXECCOMMAND = 2;
 const SERVERDATA_RESPONSE_VALUE = 0;
@@ -30,16 +29,13 @@ export class MinecraftRCON {
     const reader = socket.readable.getReader();
 
     try {
-      // 1. Авторизация
       await this.writePacket(writer, SERVERDATA_AUTH, this.password);
       
-      // Читаем ответ авторизации
       let authRes = await this.readPacket(reader);
       if (authRes.id === -1) {
         throw new Error('RCON Authentication failed: Invalid password');
       }
 
-      // 2. Выполнение команды
       await this.writePacket(writer, SERVERDATA_EXECCOMMAND, command);
       const cmdRes = await this.readPacket(reader);
 
@@ -53,10 +49,9 @@ export class MinecraftRCON {
   private async writePacket(writer: WritableStreamDefaultWriter, type: number, body: string) {
     const encoder = new TextEncoder();
     const bodyBytes = encoder.encode(body);
-    // Длина: 4(id) + 4(type) + body + 2(null terminators)
     const packetLength = 10 + bodyBytes.length;
     
-    const buffer = new ArrayBuffer(packetLength + 4); // +4 для самого поля длины
+    const buffer = new ArrayBuffer(packetLength + 4);
     const view = new DataView(buffer);
 
     view.setInt32(0, packetLength, true); 
