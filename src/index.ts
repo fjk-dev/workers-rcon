@@ -17,7 +17,7 @@ interface RCONPacket {
   body: string;
 }
 
-export class MinecraftRCON {
+export class RCON {
   private host: string;
   private port: number;
   private password: string;
