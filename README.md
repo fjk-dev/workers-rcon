@@ -12,11 +12,11 @@ npm install workers-rcon
 ## Использование в Cloudflare Workers
 
 ```javascript
-import { MinecraftRCON } from 'workers-rcon';
+import { RCON } from 'workers-rcon';
 
 export default {
   async fetch(request, env) {
-    const rcon = new MinecraftRCON({
+    const rcon = new RCON({
       host: 'your-server-ip.com',
       port: 25575,
       password: 'your_rcon_password'
