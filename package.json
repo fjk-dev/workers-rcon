@@ -1,20 +1,36 @@
 {
   "name": "workers-rcon",
-  "version": "1.0.1",
+  "version": "1.0.5",
+  "description": "Легкая библиотека для работы с Minecraft RCON в среде Cloudflare Workers",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "author": "fjk-dev",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fjk-dev/workers-rcon/"
+    "url": "https://github.com/fjk-dev/workers-rcon"
   },
   "bugs": {
-    "url": "https://github.com/fjk-dev/workers-rcon/"
+    "url": "https://github.com/fjk-dev/workers-rcon"
   },
-  "homepage": "https://github.com/fjk-dev/workers-rcon/",
+  "homepage": "https://github.com/fjk-dev/workers-rcon",
   "keywords": [
     "cloudflare",
     "workers",
     "minecraft",
     "rcon",
     "tcp"
-  ]
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260528.1",
+    "typescript": "^5.4.5"
+  }
 }
